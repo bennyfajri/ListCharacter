@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ListCharacter</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="sex">Sex</string>
+    <string name="birthday">Birthday</string>
+    <string name="region">Region</string>
+    <string name="lore">Lore</string>
+</resources>
