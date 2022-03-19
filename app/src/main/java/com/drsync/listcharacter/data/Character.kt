@@ -9,5 +9,5 @@ data class Character(
     val birthday: String,
     val region: String,
     val lore: String,
-    val characterImageId: Int = 0
+    val characterImageId: String
 ) : Serializable

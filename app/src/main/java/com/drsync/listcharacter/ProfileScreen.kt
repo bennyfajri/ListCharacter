@@ -14,6 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.compose.rememberImagePainter
 import com.drsync.listcharacter.data.Character
 
 @Composable
@@ -47,14 +49,7 @@ private fun ProfileHeader(
     character: Character,
     containerHeight: Dp
 ) {
-    Image(
-        painter = painterResource(id = character.characterImageId),
-        contentDescription = character.name,
-        modifier = Modifier
-            .heightIn(max = containerHeight / 2)
-            .fillMaxWidth(),
-        contentScale = ContentScale.Crop
-    )
+    AsyncImage(model = character.characterImageId, contentDescription = character.name)
 }
 
 @Composable
