@@ -1,7 +1,9 @@
 package com.drsync.listcharacter.data
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Character(
     val id: Int,
     val name: String,
@@ -9,5 +11,5 @@ data class Character(
     val birthday: String,
     val region: String,
     val lore: String,
-    val characterImageId: String
-) : Serializable
+    val image: String
+): Parcelable

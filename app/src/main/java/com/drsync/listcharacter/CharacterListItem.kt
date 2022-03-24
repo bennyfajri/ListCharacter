@@ -1,6 +1,5 @@
 package com.drsync.listcharacter
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -12,8 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.drsync.listcharacter.data.Character
@@ -46,7 +43,7 @@ fun CharacterListItem(character: Character, navigateToProfile: (Character) -> Un
 @Composable
 private fun CharacterImage(character: Character) {
     AsyncImage(
-        model = character.characterImageId, contentDescription = character.name, modifier = Modifier
+        model = character.image, contentDescription = character.name, modifier = Modifier
             .padding(8.dp)
             .size(84.dp)
             .clip(RoundedCornerShape(corner = CornerSize(16.dp)))

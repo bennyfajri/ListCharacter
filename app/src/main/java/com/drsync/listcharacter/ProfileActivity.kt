@@ -18,7 +18,7 @@ import com.drsync.listcharacter.ui.theme.ListCharacterTheme
 class ProfileActivity : ComponentActivity() {
 
     private val character: Character by lazy {
-        intent?.getSerializableExtra(CHARA_ID) as Character
+        intent?.getParcelableExtra(CHARA_ID)!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

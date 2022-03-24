@@ -7,17 +7,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import com.drsync.listcharacter.data.Character
-import com.drsync.listcharacter.data.DataProvider
+import com.drsync.listcharacter.viewmodel.CharacterViewModel
 
 @Composable
 fun CharacterHomeContent(navigateToProfile: (Character) -> Unit) {
-    val character = remember { DataProvider.characterList }
+    val viewModel = CharacterViewModel()
+
+    viewModel.getCharacter()
+    val character = remember { viewModel.characterData }
     LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
-        items(
-            items = character,
-            itemContent = {
-                CharacterListItem(character = it, navigateToProfile)
-            }
-        )
+        items(character.value){
+            CharacterListItem(character = it, navigateToProfile = navigateToProfile)
+        }
+//            items = character,
+//            itemContent = {
+//                CharacterListItem(character = it, navigateToProfile)
+//            }
+//        )
     }
 }

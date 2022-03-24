@@ -1,23 +1,18 @@
 package com.drsync.listcharacter
 
-import android.icu.number.Scale
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.drsync.listcharacter.data.Character
 
 @Composable
@@ -52,7 +47,7 @@ private fun ProfileHeader(
     containerHeight: Dp
 ) {
     AsyncImage(
-        model = character.characterImageId,
+        model = character.image,
         contentDescription = character.name,
         modifier = Modifier
             .fillMaxWidth()
