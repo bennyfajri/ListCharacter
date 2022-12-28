@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.drsync.listcharacter.data.Character
+import com.drsync.listcharacter.data.entity.Character
 
 @Composable
 fun ProfileScreen(character: Character) {
@@ -47,7 +47,7 @@ private fun ProfileHeader(
     containerHeight: Dp
 ) {
     AsyncImage(
-        model = character.image,
+        model = character.imageUrl,
         contentDescription = character.name,
         modifier = Modifier
             .fillMaxWidth()
@@ -61,7 +61,7 @@ private fun ProfileContent(character: Character, containerHeight: Dp) {
     Column {
         Name(character)
         ProfileProperty(laber = stringResource(id = R.string.birthday), value = character.birthday)
-        ProfileProperty(laber = stringResource(id = R.string.sex), value = character.sex)
+        ProfileProperty(laber = stringResource(id = R.string.gender), value = character.gender)
         ProfileProperty(laber = stringResource(id = R.string.region), value = character.region)
         ProfileProperty(laber = stringResource(id = R.string.lore), value = character.lore)
 

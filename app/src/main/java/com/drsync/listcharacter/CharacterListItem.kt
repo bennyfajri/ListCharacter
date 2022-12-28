@@ -43,7 +43,7 @@ fun CharacterListItem(character: Character, navigateToProfile: (Character) -> Un
 @Composable
 private fun CharacterImage(character: Character) {
     AsyncImage(
-        model = character.image, contentDescription = character.name, modifier = Modifier
+        model = character.imageUrl, contentDescription = character.name, modifier = Modifier
             .padding(8.dp)
             .size(84.dp)
             .clip(RoundedCornerShape(corner = CornerSize(16.dp)))
