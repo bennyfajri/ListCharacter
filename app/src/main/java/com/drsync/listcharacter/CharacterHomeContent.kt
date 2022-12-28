@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
-import com.drsync.listcharacter.data.Character
+import com.drsync.listcharacter.data.entity.Character
 import com.drsync.listcharacter.viewmodel.CharacterViewModel
 
 @Composable
