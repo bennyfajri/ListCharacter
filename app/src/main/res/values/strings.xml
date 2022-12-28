@@ -5,4 +5,7 @@
     <string name="birthday">Birthday</string>
     <string name="region">Region</string>
     <string name="lore">Lore</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_favorited">Favorited</string>
+    <string name="menu_profile">Profile</string>
 </resources>

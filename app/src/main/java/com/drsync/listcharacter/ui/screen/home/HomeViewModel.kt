@@ -1,4 +1,4 @@
-package com.drsync.listcharacter.viewmodel
+package com.drsync.listcharacter.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class CharacterViewModel(
+class HomeViewModel(
     private val repository: CharacterRepository
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<UiState<List<Character>>> = MutableStateFlow(UiState.Loading)
