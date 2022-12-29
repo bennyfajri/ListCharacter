@@ -1,12 +1,13 @@
 package com.drsync.listcharacter.ui.screen.detail
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.drsync.listcharacter.data.entity.Character
 import com.drsync.listcharacter.repository.CharacterRepository
 import com.drsync.listcharacter.ui.common.UiState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
@@ -17,6 +18,9 @@ class DetailViewModel(
     val uiState: StateFlow<UiState<Character>>
         get() = _uiState
 
+    private var _isFavorited = MutableLiveData<Boolean>()
+    val isFavorited : LiveData<Boolean> get() = _isFavorited
+
     fun getCharacterById(charId: Int) {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
@@ -24,15 +28,21 @@ class DetailViewModel(
         }
     }
 
-    fun addToFavorite(character: Character, favoriteState: Boolean) {
+    fun addToFavorite(charId: Int) {
         viewModelScope.launch {
-            repository.setFavoritedCharacter(character, favoriteState)
+            val character = repository.getCharacterById(charId)
+            if (character.isFavorited) {
+                repository.setFavoritedCharacter(character, false)
+            } else {
+                repository.setFavoritedCharacter(character, true)
+            }
+            isCharacterFavorited(character.name)
         }
     }
 
-    fun isCharacterFavorited(name: String, isFavorited: (Boolean) -> Unit) {
+    fun isCharacterFavorited(name: String) {
         viewModelScope.launch {
-            isFavorited(repository.isCharacterFavorited(name))
+            _isFavorited.value = repository.isCharacterFavorited(name)
         }
     }
 }

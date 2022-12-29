@@ -4,15 +4,21 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -37,6 +43,7 @@ fun DetailScreen(
     ),
     navigateBack: () -> Unit
 ) {
+    val favoriteStatus by viewModel.isFavorited.observeAsState(false)
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
@@ -44,6 +51,7 @@ fun DetailScreen(
             }
             is UiState.Success -> {
                 val data = uiState.data
+                viewModel.isCharacterFavorited(data.name)
                 DetailContent(
                     imageUrl = data.imageUrl,
                     name = data.name,
@@ -51,7 +59,11 @@ fun DetailScreen(
                     gender = data.gender,
                     region = data.region,
                     lore = data.lore,
-                    navigateBack = navigateBack
+                    navigateBack = navigateBack,
+                    isCharacterFavorited = favoriteStatus,
+                    changeFavorited = {
+                        viewModel.addToFavorite(data.id)
+                    }
                 )
             }
             is UiState.Error -> {}
@@ -68,7 +80,9 @@ private fun DetailContent(
     region: String,
     lore: String,
     modifier: Modifier = Modifier,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    isCharacterFavorited: Boolean,
+    changeFavorited: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -93,12 +107,36 @@ private fun DetailContent(
                     .clickable { navigateBack() }
             )
         }
-        Text(
-            text = name,
-            style = MaterialTheme.typography.h4,
-            fontWeight = FontWeight.ExtraBold,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = name,
+                style = MaterialTheme.typography.h4,
+                fontWeight = FontWeight.ExtraBold,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
+            FloatingActionButton(
+                onClick = changeFavorited,
+            ) {
+                Icon(
+                    imageVector = if (isCharacterFavorited) {
+                        Icons.Default.Favorite
+                    } else {
+                        Icons.Default.FavoriteBorder
+                    },
+                    contentDescription = stringResource(id = R.string.menu_favorited),
+                    tint = if (isCharacterFavorited) {
+                        Color.Red
+                    } else {
+                        Color.DarkGray
+                    }
+                )
+            }
+        }
         ProfileProperty(label = stringResource(id = R.string.birthday), value = birthday)
         ProfileProperty(label = stringResource(id = R.string.gender), value = gender)
         ProfileProperty(label = stringResource(id = R.string.region), value = region)
@@ -118,7 +156,9 @@ fun DetailScreenPrev() {
             gender = "Female",
             region = "Mondstadt",
             lore = "lorem ipsum",
-            navigateBack = {}
+            navigateBack = {},
+            isCharacterFavorited = true,
+            changeFavorited = {}
         )
     }
 }
