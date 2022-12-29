@@ -23,6 +23,7 @@ import androidx.navigation.navArgument
 import com.drsync.listcharacter.ui.navigation.NavigationItem
 import com.drsync.listcharacter.ui.navigation.Screen
 import com.drsync.listcharacter.ui.screen.detail.DetailScreen
+import com.drsync.listcharacter.ui.screen.favorited.FavoritedScreen
 import com.drsync.listcharacter.ui.screen.home.HomeScreen
 import com.drsync.listcharacter.ui.theme.ListCharacterTheme
 
@@ -55,7 +56,11 @@ fun MyCharacterApp(
                 )
             }
             composable(Screen.Favorited.route) {
-
+                FavoritedScreen(
+                    navigateToDetail = { charId ->
+                        navController.navigate(Screen.DetailCharacter.createRoute(charId))
+                    }
+                )
             }
             composable(
                 route = Screen.DetailCharacter.route,
