@@ -70,7 +70,6 @@ fun HomeContent(
             query = query as String,
             onValueChange = searchCharacter,
             modifier = Modifier.padding(
-                bottom = 8.dp,
                 top = 16.dp,
                 start = 16.dp,
                 end = 16.dp

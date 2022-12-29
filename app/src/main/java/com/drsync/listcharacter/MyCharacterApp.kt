@@ -25,6 +25,7 @@ import com.drsync.listcharacter.ui.navigation.Screen
 import com.drsync.listcharacter.ui.screen.detail.DetailScreen
 import com.drsync.listcharacter.ui.screen.favorited.FavoritedScreen
 import com.drsync.listcharacter.ui.screen.home.HomeScreen
+import com.drsync.listcharacter.ui.screen.profile.ProfileScreen
 import com.drsync.listcharacter.ui.theme.ListCharacterTheme
 
 @Composable
@@ -61,6 +62,9 @@ fun MyCharacterApp(
                         navController.navigate(Screen.DetailCharacter.createRoute(charId))
                     }
                 )
+            }
+            composable(Screen.Profile.route) {
+                ProfileScreen()
             }
             composable(
                 route = Screen.DetailCharacter.route,
