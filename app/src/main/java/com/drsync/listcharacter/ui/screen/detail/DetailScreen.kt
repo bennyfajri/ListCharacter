@@ -1,10 +1,14 @@
 package com.drsync.listcharacter.ui.screen.detail
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -46,7 +50,8 @@ fun DetailScreen(
                     birthday = data.birthday,
                     gender = data.gender,
                     region = data.region,
-                    lore = data.lore
+                    lore = data.lore,
+                    navigateBack = navigateBack
                 )
             }
             is UiState.Error -> {}
@@ -62,22 +67,32 @@ private fun DetailContent(
     gender: String,
     region: String,
     lore: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateBack: () -> Unit
 ) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
-        AsyncImage(
-            model = imageUrl,
-            contentDescription = name,
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxSize(1f / 3),
-            contentScale = ContentScale.Crop,
-            alignment = Alignment.TopStart
-        )
+        Box {
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = name,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxSize(1f / 3),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopStart
+            )
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = stringResource(R.string.back),
+                modifier = Modifier
+                    .size(28.dp)
+                    .clickable { navigateBack() }
+            )
+        }
         Text(
             text = name,
             style = MaterialTheme.typography.h4,
@@ -92,7 +107,7 @@ private fun DetailContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun DetailScreenPrev() {
     ListCharacterTheme {
@@ -102,7 +117,8 @@ fun DetailScreenPrev() {
             birthday = "Oct 25th",
             gender = "Female",
             region = "Mondstadt",
-            lore = "lorem ipsum"
+            lore = "lorem ipsum",
+            navigateBack = {}
         )
     }
 }
