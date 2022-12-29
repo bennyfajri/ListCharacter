@@ -1,10 +1,6 @@
 package com.drsync.listcharacter.data.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.drsync.listcharacter.data.entity.Character
 import kotlinx.coroutines.flow.Flow
 
@@ -15,6 +11,9 @@ interface CharacterDao {
 
     @Query("SELECT * FROM characters WHERE favorited = 1")
     fun getFavoritedCharacter(): Flow<List<Character>>
+
+    @Query("SELECT * FROM characters WHERE name LIKE '%' || :query || '%' OR region LIKE '%' || :query || '%' ")
+    fun searchCharacters(query : String): Flow<List<Character>>
 
     @Query("SELECT * FROM characters WHERE id = :id")
     suspend fun getCharacterById(id: Int): Character

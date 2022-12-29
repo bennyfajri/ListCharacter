@@ -2,10 +2,12 @@ package com.drsync.listcharacter.ui.screen.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -16,6 +18,7 @@ import com.drsync.listcharacter.di.Injection
 import com.drsync.listcharacter.ui.common.UiState
 import com.drsync.listcharacter.ui.components.CharacterItem
 import com.drsync.listcharacter.ui.ViewModelFactory
+import com.drsync.listcharacter.ui.components.SearchBar
 
 @Composable
 fun HomeScreen(
@@ -25,7 +28,7 @@ fun HomeScreen(
     ),
     navigateToDetail: (Int) -> Unit
 ) {
-
+    val query by viewModel.query
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
@@ -35,7 +38,9 @@ fun HomeScreen(
                 HomeContent(
                     characters = uiState.data,
                     modifier = modifier,
-                    navigateToDetail = navigateToDetail
+                    navigateToDetail = navigateToDetail,
+                    searchCharacter = viewModel::searchCharacters,
+                    query = query
                 )
             }
             is UiState.Error -> {}
@@ -47,12 +52,21 @@ fun HomeScreen(
 fun HomeContent(
     characters: List<Character>,
     modifier: Modifier = Modifier,
-    navigateToDetail: (Int) -> Unit
+    navigateToDetail: (Int) -> Unit,
+    searchCharacter: (String) -> Unit,
+    query: String? = null,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
         modifier = modifier.testTag("CharacterList")
     ) {
+        item {
+            SearchBar(
+                query = query as String,
+                onValueChange = searchCharacter,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+        }
         items(characters) { data ->
             CharacterItem(
                 image = data.imageUrl, name = data.name,

@@ -40,6 +40,10 @@ class CharacterRepository private constructor(
         characterDao.updateCharacter(character)
     }
 
+    fun searchCharacters(query: String): Flow<List<Character>> {
+        return characterDao.searchCharacters(query)
+    }
+
     suspend fun insertCharacter(character: Character) {
         characterDao.insertCharacter(character)
     }

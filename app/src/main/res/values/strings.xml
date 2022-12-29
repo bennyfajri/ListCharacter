@@ -9,4 +9,5 @@
     <string name="menu_favorited">Favorited</string>
     <string name="menu_profile">Profile</string>
     <string name="back">Back</string>
+    <string name="search_character">Search your favorite characters</string>
 </resources>
