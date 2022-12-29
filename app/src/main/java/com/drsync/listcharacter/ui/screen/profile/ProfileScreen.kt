@@ -22,7 +22,7 @@ import com.drsync.listcharacter.util.Constants.PROFILE_NAME
 fun ProfileScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(16.dp).fillMaxSize()
+        modifier = Modifier.padding(24.dp).fillMaxSize()
     ) {
         AsyncImage(
             model = PROFILE_IMAGE,

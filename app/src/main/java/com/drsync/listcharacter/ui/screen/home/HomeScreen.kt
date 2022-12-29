@@ -78,7 +78,9 @@ fun HomeContent(
         if (characters.isEmpty()) {
             Text(
                 text = stringResource(id = R.string.no_chara_found),
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(16.dp)
             )
         } else {
             LazyColumn(
