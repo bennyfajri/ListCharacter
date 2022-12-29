@@ -16,6 +16,9 @@ interface CharacterDao {
     @Query("SELECT * FROM characters WHERE favorited = 1")
     fun getFavoritedCharacter(): Flow<List<Character>>
 
+    @Query("SELECT * FROM characters WHERE id = :id")
+    suspend fun getCharacterById(id: Int): Character
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCharacters(characters: List<Character>)
 
@@ -29,5 +32,5 @@ interface CharacterDao {
     suspend fun deleteAll()
 
     @Query("SELECT EXISTS(SELECT * FROM characters WHERE name = :name AND favorited = 1)")
-    suspend fun isNewsBookmarked(name: String): Boolean
+    suspend fun isCharacterFavorited(name: String): Boolean
 }

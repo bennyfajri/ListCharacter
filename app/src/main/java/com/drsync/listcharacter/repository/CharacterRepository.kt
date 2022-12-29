@@ -27,6 +27,10 @@ class CharacterRepository private constructor(
         emitAll(localData)
     }
 
+    suspend fun getCharacterById(id: Int): Character {
+        return characterDao.getCharacterById(id)
+    }
+
     fun getFavoritedCharacter(): Flow<List<Character>> {
         return characterDao.getFavoritedCharacter()
     }
@@ -38,6 +42,10 @@ class CharacterRepository private constructor(
 
     suspend fun insertCharacter(character: Character) {
         characterDao.insertCharacter(character)
+    }
+
+    suspend fun isCharacterFavorited(name: String): Boolean {
+        return characterDao.isCharacterFavorited(name)
     }
 
     companion object {

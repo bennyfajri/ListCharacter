@@ -14,12 +14,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.drsync.listcharacter.ui.navigation.NavigationItem
 import com.drsync.listcharacter.ui.navigation.Screen
+import com.drsync.listcharacter.ui.screen.detail.DetailScreen
 import com.drsync.listcharacter.ui.screen.home.HomeScreen
 import com.drsync.listcharacter.ui.theme.ListCharacterTheme
 
@@ -51,8 +54,22 @@ fun MyCharacterApp(
                     }
                 )
             }
-            composable(Screen.Favorited.route){
+            composable(Screen.Favorited.route) {
 
+            }
+            composable(
+                route = Screen.DetailCharacter.route,
+                arguments = listOf(navArgument("charId") {
+                    type = NavType.IntType
+                })
+            ) {
+                val id = it.arguments?.getInt("charId") ?: 1
+                DetailScreen(
+                    characterId = id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
             }
         }
     }
