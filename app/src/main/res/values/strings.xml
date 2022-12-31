@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">ListCharacter</string>
     <string name="title_activity_profile">ProfileActivity</string>
-    <string name="sex">Sex</string>
+    <string name="gender">Gender</string>
     <string name="birthday">Birthday</string>
     <string name="region">Region</string>
     <string name="lore">Lore</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_favorited">Favorited</string>
+    <string name="menu_profile">Profile</string>
+    <string name="back">Back</string>
+    <string name="search_character">Search your favorite characters</string>
+    <string name="no_chara_found">No character found :(</string>
 </resources>
