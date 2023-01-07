@@ -87,7 +87,7 @@ fun HomeContent(
                 contentPadding = PaddingValues(16.dp),
                 modifier = modifier.testTag("CharacterList")
             ) {
-                items(characters) { data ->
+                items(characters, key = { it.id }) { data ->
                     CharacterItem(
                         image = data.imageUrl,
                         name = data.name,
