@@ -57,9 +57,9 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     characters: List<Character>,
-    modifier: Modifier = Modifier,
     navigateToDetail: (Int) -> Unit,
     searchCharacter: (String) -> Unit,
+    modifier: Modifier = Modifier,
     query: String? = null,
 ) {
     Column(
