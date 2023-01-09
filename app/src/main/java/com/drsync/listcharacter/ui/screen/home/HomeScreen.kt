@@ -69,7 +69,7 @@ fun HomeContent(
         SearchBar(
             query = query as String,
             onValueChange = searchCharacter,
-            modifier = Modifier.padding(
+            modifier = modifier.padding(
                 top = 16.dp,
                 start = 16.dp,
                 end = 16.dp
@@ -85,7 +85,7 @@ fun HomeContent(
         } else {
             LazyColumn(
                 contentPadding = PaddingValues(16.dp),
-                modifier = modifier.testTag("CharacterList")
+                modifier = Modifier.testTag("CharacterList")
             ) {
                 items(characters, key = { it.id }) { data ->
                     CharacterItem(
