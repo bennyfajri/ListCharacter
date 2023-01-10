@@ -85,7 +85,7 @@ fun HomeContent(
         } else {
             LazyColumn(
                 contentPadding = PaddingValues(16.dp),
-                modifier = Modifier.testTag("CharacterList")
+                modifier = Modifier.testTag(stringResource(id = R.string.key_char_list))
             ) {
                 items(characters, key = { it.id }) { data ->
                     CharacterItem(

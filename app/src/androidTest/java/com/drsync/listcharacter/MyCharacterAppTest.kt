@@ -1,7 +1,9 @@
 package com.drsync.listcharacter
 
+import android.content.res.Resources
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.ComposeNavigator
@@ -17,6 +19,7 @@ class MyCharacterAppTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private lateinit var navController: TestNavHostController
+    private lateinit var context: TestContext
 
     @Before
     fun setUp() {
@@ -54,7 +57,7 @@ class MyCharacterAppTest {
 
     @Test
     fun navHost_BackButtonOnDetailPressed_toHome() {
-        composeTestRule.onNodeWithTag("CharacterList").performScrollToIndex(9)
+        composeTestRule.onNodeWithTag(composeTestRule.activity.getString(R.string.key_char_list)).performScrollToIndex(9)
         composeTestRule.onNodeWithText(DataProvider.characterList[9].name).performClick()
         navController.assertCurrentRouteName(Screen.DetailCharacter.route)
         composeTestRule.onNodeWithContentDescription(composeTestRule.activity.getString(R.string.back)).performClick()

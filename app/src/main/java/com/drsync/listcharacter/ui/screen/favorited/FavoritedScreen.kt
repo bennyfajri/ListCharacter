@@ -9,8 +9,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.drsync.listcharacter.R
 import com.drsync.listcharacter.data.entity.Character
 import com.drsync.listcharacter.di.Injection
 import com.drsync.listcharacter.ui.ViewModelFactory
@@ -52,7 +54,7 @@ fun FavoriteContent(
 ) {
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
-        modifier = modifier.testTag("CharacterList")
+        modifier = modifier.testTag(stringResource(id = R.string.key_char_list))
     ) {
         items(characters, key = { it.id }) { data ->
             CharacterItem(
