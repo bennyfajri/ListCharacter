@@ -11,4 +11,5 @@
     <string name="back">Back</string>
     <string name="search_character">Search your favorite characters</string>
     <string name="no_chara_found">No character found :(</string>
+    <string name="key_char_list">CharacterList</string>
 </resources>
